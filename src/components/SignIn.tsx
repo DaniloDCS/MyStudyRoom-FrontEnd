@@ -2,14 +2,19 @@ import { Form } from "@unform/web";
 import { Input } from "./form/Input";
 import { Label } from "./form/Label";
 
+const API = import.meta.env.VITE_API_URL;
+
 export function SignIn() {
+  
   function handleSubmit(data: any) {
-    
-    fetch("http://localhost:3333/account/signin", {
+    console.log(JSON.stringify(data));
+    fetch(`${API}account/signIn`, {
       method: "POST",
-      headers: {
+      mode: "no-cors",
+      headers: new Headers({
         "Content-Type": "application/json",
-      },
+        "Access-Control-Allow-Origin": "https://apimystudyroom.herokuapp.com/"
+      }),
       body: JSON.stringify(data),
     })
       .then((response) => {
